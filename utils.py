@@ -22,3 +22,23 @@ df_receita_mensal['Ano'] = df_receita_mensal['Data da Compra'].dt.year
 df_receita_mensal['Mes'] = df_receita_mensal['Data da Compra'].dt.month_name(locale="Portuguese")
 
 #print(df_receita_mensal)
+
+
+## 3 - DataFrame Receita por Categoria
+df_receita_categoria = df.groupby('Categoria do Produto')[['Preço']].sum().sort_values('Preço', ascending=False)
+
+# Imprimir os 5 primeiras categorias com melhor desempenho em vendas
+#print(df_receita_categoria.head())
+
+## 4 -  DataFrame Vendedores
+df_vendedores = pd.DataFrame(df.groupby('Vendedor')['Preço'].agg(['sum', 'count']))
+
+#print(df_vendedores)
+
+
+
+
+
+
+
+

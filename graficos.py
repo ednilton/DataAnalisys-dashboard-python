@@ -1,5 +1,5 @@
 import plotly.express as px # importa nossa biblioteca gráfica
-from utils import df_receita_estado, df_receita_mensal
+from utils import df_receita_estado, df_receita_mensal, df_receita_categoria, df_vendedores
 
 
 grafico_map_receita_estado = px.scatter_geo(
@@ -35,4 +35,28 @@ grafico_receita_estado = px.bar(
     y = 'Preço',
     text_auto = True,
     title = 'Top Receitas por Estado'
+)
+
+# Gráficos de Categorias
+grafico_receita_categoria = px.bar(
+    df_receita_categoria.head(7),
+    text_auto= True,
+    title= 'Top 7 Categorias com maior receita'
+)
+
+# Gráfico receita vendedores
+grafico_receita_vendedores = px.bar(
+    df_vendedores[['sum']].sort_values('sum', ascending=False).head(7),
+    x = 'sum',
+    y= df_vendedores[['sum']].sort_values('sum', ascending=False).head(7).index, 
+    text_auto=True,
+    title='Top 76 Vendedores por Receita'
+)
+
+# Gráfico de volume de vendas por vendedores
+grafico_vendas_vendedores = px.bar(
+    df_vendedores[['count']].sort_values('count', ascending=False).head(7),
+    x = 'count',
+    y = df_vendedores[['count']].sort_values('count', ascending=False).head(7).index,
+    title='Top 7 Vendedores por Venda'
 )
